@@ -1,0 +1,2 @@
+# Media-Cleanup
+This plugin will list out all media files in wp-upload folder.  It will compare the list of files with the list of media files in the media library database. Then it will give you the option to add files to media library or remove files from your upload folder. Also list out list of media urls in the site and compare it the media library files and remove all media that isnt being used on site.
