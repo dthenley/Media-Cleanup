@@ -74,6 +74,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-media-cleanup.php';
 /**
  * custom option and settings
  */
+/*
 function wporg_settings_init() {
     // Register a new setting for "wporg" page.
     register_setting( 'wporg', 'wporg_options' );
@@ -100,11 +101,12 @@ function wporg_settings_init() {
         )
     );
 }
+*/
  
 /**
  * Register our wporg_settings_init to the admin_init action hook.
  */
-add_action( 'admin_init', 'wporg_settings_init' );
+//add_action( 'admin_init', 'wporg_settings_init' );
  
  
 /**
@@ -118,12 +120,14 @@ add_action( 'admin_init', 'wporg_settings_init' );
  *
  * @param array $args  The settings array, defining title, id, callback.
  */
+/*
 function wporg_section_developers_callback( $args ) {
     ?>
     <p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Follow the white rabbit.', 'wporg' ); ?></p>
     <?php
 }
  
+*/
 /**
  * Pill field callbakc function.
  *
@@ -134,6 +138,7 @@ function wporg_section_developers_callback( $args ) {
  *
  * @param array $args
  */
+/*
 function wporg_field_pill_cb( $args ) {
     // Get the value of the setting we've registered with register_setting()
     $options = get_option( 'wporg_options' );
@@ -157,10 +162,12 @@ function wporg_field_pill_cb( $args ) {
     </p>
     <?php
 }
+*/
  
 /**
  * Add the top level menu page.
  */
+/*
 function wporg_options_page() {
     add_menu_page(
         'WPOrg',
@@ -170,17 +177,18 @@ function wporg_options_page() {
         'wporg_options_page_html'
     );
 }
- 
+ */
  
 /**
  * Register our wporg_options_page to the admin_menu action hook.
  */
-add_action( 'admin_menu', 'wporg_options_page' );
+//add_action( 'admin_menu', 'wporg_options_page' );
  
  
 /**
  * Top level menu callback function
  */
+/*
 function wporg_options_page_html() {
     // check user capabilities
     if ( ! current_user_can( 'manage_options' ) ) {
@@ -209,6 +217,8 @@ function wporg_options_page_html() {
 			function dirToArray($dir) {
   
 				$result = array();
+                $final_result = array();
+                $c = 0;
 			 
 				$cdir = scandir($dir);
 				foreach ($cdir as $key => $value)
@@ -218,17 +228,23 @@ function wporg_options_page_html() {
 					  if (is_dir($dir . DIRECTORY_SEPARATOR . $value))
 					  {
 						 $result[$value] = dirToArray($dir . '/' . $value);
+                         
 					  }
 					  else
 					  {
-						 $result[] = $dir . '/' . $value;
+						 $result[] = $dir . '/' . $value . 'donte';
+                         print_r($dir . '/' . $value . ' - '.$c.'<br>');
+						 $final_result[$c] = $dir . '/' . $value;
+                         $c++;
+
 					  }
 				   }
 				}
 			   
-				return $result;
+				return $final_result;
 			 }
 			 print_r( dirToArray($upload_folder));
+             $full_upload_folder = dirToArray($upload_folder);
 			?>
 
 		</pre>
@@ -250,7 +266,7 @@ function wporg_options_page_html() {
 				// print_r($image);
 				$images[] = get_attached_file( $image->ID );
 			}
-			print_r($images);
+			// print_r($images);
 			?>
 		</pre>
 		
@@ -268,6 +284,7 @@ function wporg_options_page_html() {
     </div>
     <?php
 }
+*/
 
 /**
  * Begins execution of the plugin.
