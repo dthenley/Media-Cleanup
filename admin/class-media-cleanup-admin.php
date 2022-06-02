@@ -59,6 +59,7 @@ class Media_Cleanup_Admin {
 	 *
 	 * @since    1.0.0
 	 */
+
 	public function enqueue_styles() {
 
 		/**
@@ -72,6 +73,11 @@ class Media_Cleanup_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+
+		//Change the hook name.
+		// if ( 'tools_page_toptal-save' != $hook ) {
+		// 	return;
+		// }
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/media-cleanup-admin.css', array(), $this->version, 'all' );
 
@@ -96,7 +102,39 @@ class Media_Cleanup_Admin {
 		 * class.
 		 */
 
+		//Change the hook name.
+		// if ( 'tools_page_toptal-save' != $hook ) {
+		// 	return;
+		// }
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/media-cleanup-admin.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+	/**
+	 * Register the settings page for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_settings_page() {
+		// Create our settings page as a submenu page.
+		add_submenu_page(
+			'upload.php',                             // parent slug
+			__( 'Media Cleanup', 'media-cleanup' ),      // page title
+			__( 'Media Cleanup', 'media-cleanup' ),      // menu title
+			'manage_options',                        // capability
+			'media-cleanup',                           // menu_slug
+			array( $this, 'display_settings_page' )  // callable function
+		);
+	}
+
+	/**
+	 * Display the settings page content for the page we have created.
+	 *
+	 * @since    1.0.0
+	 */
+	public function display_settings_page() {
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/media-cleanup-admin-display.php';
 
 	}
 
