@@ -11,12 +11,10 @@
  * @package    Media_Cleanup
  * @subpackage Media_Cleanup/admin/partials
  */
-?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<?php
-
-
+/**
+ * Scan the upload folder
+ */
 function scanDirAndSubdir($dir, &$out = []) {
     $sun = scandir($dir);
     
@@ -39,13 +37,12 @@ function scanDirAndSubdir($dir, &$out = []) {
 
 // Gets the actual Directory
 $upload_folder = wp_get_upload_dir()['basedir'] . '/';
+$directory_array = scanDirAndSubdir($upload_folder);
 
 
-
-
-echo '<pre>';
+// echo '<pre>';
 // var_dump(scanDirAndSubdir($upload_folder));
-echo '</pre>';
+// echo '</pre>';
 
 // Get Media Library Urls
 $query_images_args = array(
@@ -62,6 +59,57 @@ foreach ( $query_images->posts as $image ) {
     $images[] = wp_get_attachment_url( $image->ID );
 }
 
-echo '<pre>';
-var_dump($images);
-echo '</pre>';
+$diff = array_diff($directory_array,$images);
+
+// echo '<pre>';
+// var_dump($images);
+// echo '</pre>';
+
+?>
+<style>
+    div.media-cleanup>div {
+        width: 33%;
+        float: left;
+    }
+</style>
+<form action="" method="post">
+    <label for="clean">Clean Image Folder</label>
+    <input type="checkbox" name="clean" id="clean">
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+<div class="media-cleanup">
+    <div>
+        <?php
+        foreach($directory_array as $key) {
+            echo "<div>$key</div>";
+        }
+        ?>
+    </div>
+    <div>
+        <?php
+        foreach($images as $key) {
+            echo "<div>$key</div>";
+        }
+        ?>
+    </div>
+    <!-- <div>
+        <?php echo "<pre>";
+        var_dump($diff);
+        echo "</pre>"; ?>
+    </div> -->
+</div>
+
+<?php
+if(!empty($_POST)){
+
+    foreach($diff as $image){
+        $image_path = str_replace(get_home_url(),untrailingslashit(get_home_path()), $image);
+        if( ! is_dir($image_path)){
+            var_dump($image_path);
+            // unlink($image_path);
+        }
+    }
+
+}
