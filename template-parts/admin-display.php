@@ -13,8 +13,5 @@
             echo '</div>';
         }
         ?>
-        <!-- <pre>
-            <?php print_r(fetch_media_library_files()); ?>
-        </pre> -->
     </div>
 </div>
