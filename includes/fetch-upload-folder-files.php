@@ -4,11 +4,7 @@ function fetch_upload_folder_files() {
     // Gets the actual Directory
     $upload_folder = wp_get_upload_dir()['basedir'] . '/';
     $directory_array = scanDirAndSubdir($upload_folder);
-    $upload_files = '';
-    foreach($directory_array as $key) {
-        $upload_files .= "<div>$key</div>";
-    }
-    return $upload_files;
+    return $directory_array;
     
 }
 
@@ -30,7 +26,7 @@ function scanDirAndSubdir($dir, &$out = []) {
 
     $out = str_replace('\\', '/', $out);
 
-    $out = str_replace( get_home_path(), get_site_url( null, '/', null ), $out );
+    // $out = str_replace( get_home_path(), get_site_url( null, '/', null ), $out );
     
     return $out;
 }

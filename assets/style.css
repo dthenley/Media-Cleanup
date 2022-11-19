@@ -1,5 +1,12 @@
+.mc-upload-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    max-width: 1400px;
+}
+
 .mc-upload-box {
-    width: 50%;
+    /* width: 50%; */
     height: 20rem;
     overflow: scroll;
     background: #fff;
