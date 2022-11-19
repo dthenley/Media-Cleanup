@@ -34,7 +34,10 @@ define( 'MEDIA_CLEANUP_VERSION', '2.0.0' );
  * 5. Run regenerate thumbnail to then go and regenerate any source set images that was deleted in the process.
  */
 // Plugin Constants
-define( 'MC_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
+$plugin_path = plugin_dir_path( __FILE__ );
+$plugin_path = str_replace('\\', '/', $plugin_path);
+define( 'MC_PLUGIN_PATH', $plugin_path);
+define( 'MC_PLUGIN_URL', plugin_dir_url( __FILE__ ));
 
  // Includes for functions
  foreach ( glob( MC_PLUGIN_PATH . "includes/*.php" ) as $file ) {
@@ -43,3 +46,4 @@ define( 'MC_PLUGIN_PATH', plugin_dir_path( __FILE__ ));
 
  // Hooks
  add_action( 'admin_menu', 'mc_register_plugin_menu');
+ add_action('admin_enqueue_scripts', 'mc_enqueue_scripts');

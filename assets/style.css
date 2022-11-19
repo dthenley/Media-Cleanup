@@ -1,0 +1,14 @@
+.mc-upload-box {
+    width: 50%;
+    height: 20rem;
+    overflow: scroll;
+    background: #fff;
+}
+
+.mc-upload-box > div {
+    padding: .25rem .5rem;
+}
+
+.mc-upload-box > div:hover {
+    background: #ccc;
+}
