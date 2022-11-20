@@ -9,6 +9,8 @@ if( !empty($_POST['diff'])) {
 <div class="wrap">
     <h1><?php echo __('Media Cleanup', 'media-cleanup'); ?></h1>
     <div class="mc-upload-boxes">
+        <div>
+        <h3><?php print_r( __( 'Uploads Folder', 'media-cleanup' ) ); ?></h3>
         <div class="mc-upload-box">
             <?php 
             $directory_array = fetch_upload_folder_files();
@@ -23,6 +25,10 @@ if( !empty($_POST['diff'])) {
             }
             ?>
         </div>
+        </div>
+        <div>
+        <h3><?php print_r( __( 'Media Library', 'media-cleanup' ) ); ?></h3>
+
         <div class="mc-upload-box">
             <?php
             $media_library_files = fetch_media_library_files();
@@ -33,6 +39,8 @@ if( !empty($_POST['diff'])) {
             ?>
         </div>
     </div><!-- .mc-upload-boxes -->
+    </div>
+
     <div>
         <form action="" method="post">
             <?php
